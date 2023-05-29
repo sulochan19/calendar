@@ -15,4 +15,7 @@ html, body {
     color: white;
     font-size: 12px;
 }
+#dropdown{
+  margin: 40px 200px;
+}
 

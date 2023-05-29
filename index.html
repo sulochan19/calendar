@@ -7,12 +7,13 @@
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.7/index.global.min.js'></script>
 </head>
 <body>
-    <label for="Name">Choose a Name:</label>
-
-<select name="name" id="name">
-  <option value="EPC/Carpentry">EPC / Carpentry</option>
-  <option value="Sales and Rental">Sales & Rental</option>
-</select>
+  <div id="dropdown">
+    <label for="Name">Division:</label>
+    <select name="name" id="name">
+      <option value="EPC/Carpentry">EPC / Carpentry</option>
+      <option value="Sales and Rental">Sales & Rental</option>
+    </select>
+  </div>
   <div id='calendar'></div>
 </body>
 </html>
