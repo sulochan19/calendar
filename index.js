@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   function initializeCalendar() {
     const calendarConfig = {
-      timeZone: 'UTC',
       displayEventTime: false,
       initialView: 'dayGridMonth',
       headerToolbar: {
@@ -16,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       editable: true,
       eventBackgroundColor: 'red',
       eventColor: 'red',
-      nextDayThreshold: '23:00:01',
+      allDay: true,
       events: apiUrl
     };
 
