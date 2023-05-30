@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function() {
   const calendarEl = document.getElementById('calendar');
-  let apiUrl = 'https://script.google.com/macros/s/AKfycbwGWkH5b4PlLIBsqwSwRI3nN87xw0sEpUyxRP1Tl7COeseNAq63wpN-LXatxopRKM9a/exec?filter=EPC/Carpentry&filter2=Carpenter-G4';
+  let apiUrl = 'https://script.google.com/macros/s/AKfycbyZNJ9mAKddDnBGhf9tEbJOssMbjI7-jK-oRc06UuRywdvBRVrwedtkY0JYd44nJCX3/exec?division=EPC/Carpentry&jobTitle=Carpenter-G4';
   let calendar;
 
   function initializeCalendar() {
@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', async function() {
       editable: true,
       eventBackgroundColor: 'red',
       eventColor: 'red',
-      eventTitle: 'Name',
       nextDayThreshold: '23:00:01',
       events: apiUrl
     };
@@ -31,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       if (response.ok) {
         const data = await response.json();
         const currentDate = new Date();
-        const filteredData = data.filter(event => new Date(event.end) >= currentDate);
+        const filteredData = data.filter(data => new Date(data.end) >= currentDate);
         populateDataTable(filteredData);
       } else {
         throw new Error('Network response was not ok.');
@@ -47,14 +46,16 @@ document.addEventListener('DOMContentLoaded', async function() {
       "bDestroy": true,
       columnDefs: [
         {
-          target: [2, 3],
+          target: [4, 5],
           render: DataTable.render.date(),
         },
       ],
       data: data,
       columns: [
-        { "data": "Payroll Number" },
+        { "data": "payroll_number" },
         { "data": "title" },
+        { "data": "division" },
+        { "data": "job_title" },
         { "data": "start" },
         { "data": "end" }
       ],
@@ -69,9 +70,8 @@ document.addEventListener('DOMContentLoaded', async function() {
   document.getElementById('name').addEventListener('change', async function() {
     const division = this.value;
     const url = new URL(apiUrl);
-    url.searchParams.set('filter', division);
+    url.searchParams.set('division', division);
     apiUrl = url.toString();
-    console.log("apiurl for change in division is ", apiUrl);
     initializeCalendar();
     await fetchAndPopulateTable();
   });
@@ -79,11 +79,9 @@ document.addEventListener('DOMContentLoaded', async function() {
   document.getElementById('job-title').addEventListener('change', async function() {
     const jobTitle = this.value;
     const url = new URL(apiUrl);
-    url.searchParams.set('filter2', jobTitle);
+    url.searchParams.set('jobTitle', jobTitle);
     apiUrl = url.toString();
-    console.log("apiurl for change in job title is ", apiUrl);
     initializeCalendar();
     await fetchAndPopulateTable();
   });
 });
-
