@@ -4,8 +4,10 @@ document.addEventListener('DOMContentLoaded', async function() {
   let calendar;
 
   function initializeCalendar() {
+
     const calendarConfig = {
       displayEventTime: false,
+      fixedWeekCount: false,
       initialView: 'dayGridMonth',
       headerToolbar: {
         left: 'prev,next today',
@@ -16,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       eventBackgroundColor: 'red',
       eventColor: 'red',
       allDay: true,
-      events: apiUrl
+      events: apiUrl,
     };
 
     calendar = new FullCalendar.Calendar(calendarEl, calendarConfig);
